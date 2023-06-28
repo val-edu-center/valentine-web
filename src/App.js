@@ -3,7 +3,6 @@ import {Routes, Route} from 'react-router-dom'
 import HomePage from './components/home/HomePage'
 import AboutPage from './components/about/AboutPage'
 import Header from './components/common/Header'
-import PageNotFound from './components/common/PageNotFound'
 import LoginPage from './components/login/LoginPage'
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'

@@ -16,10 +16,6 @@ const AboutPage = () => (
             773-927-7373
         </p>
         <a href="https://bgcc.org/louis-l-valentine-club/" target="_blank">Official Web Page</a>
-
-
-        <h2>About How Use Member Data</h2>
-        <p>We only store the names of our members in order to provide internal club services! We never expose our member outside the club</p>
     </div>
 );
 
