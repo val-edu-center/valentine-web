@@ -3,6 +3,7 @@ import React from "react";
 const AboutPage = () => (
     <div>
         <h2>About Valentine</h2>
+        <h3>Click on the link below for a virtual tour!</h3>
         <a href="https://my.matterport.com/show/?m=52xv3EyTypD" target="_blank">
             3400 S. Emerald<br/>
             Chicago, IL 60616<br/>
@@ -15,7 +16,10 @@ const AboutPage = () => (
             773-927-7373
         </p>
         <a href="https://bgcc.org/louis-l-valentine-club/" target="_blank">Official Web Page</a>
-            
+
+
+        <h2>About How Use Member Data</h2>
+        <p>We only store the names of our members in order to provide internal club services! We never expose our member outside the club</p>
     </div>
 );
 
