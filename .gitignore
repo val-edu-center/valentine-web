@@ -4,7 +4,7 @@ valentine-web.code-workspace
 
 build/
 package-lock.json
-
+yarn.lock
 
 # Logs
 logs

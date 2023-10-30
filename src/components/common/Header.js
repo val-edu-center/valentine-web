@@ -5,24 +5,23 @@ import PropTypes from 'prop-types'
 
 const Header = ( {session} ) => {
     const rightJustifiedStyle = { float: 'right'}
-    const activeStyle = { color: "#F152BA"}
     // const isBanker = session.roles.isBanker
     // const is3DClub = session.roles.is3DClubPrinter || session.roles.is3DClubDesigner
     const isDirector = session.roles.isDirector
     const isStaff = session.roles.isStaff
     return (
         <nav>
-            <NavLink to="/" activeStyle={activeStyle} exact >Home</NavLink> 
+            <NavLink to="/" exact="true" >Home</NavLink> 
             {" | "}
-            <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+            <NavLink to="/about">About</NavLink>
             {session.sessionToken && " | "}
-            {session.sessionToken && <NavLink to="/accounts" activeStyle={activeStyle}>Accounts</NavLink>}
+            {session.sessionToken && <NavLink to="/accounts">Accounts</NavLink>}
             {session.sessionToken && (isDirector || isStaff) && " | "}
-            {session.sessionToken && (isDirector || isStaff) && <NavLink to="/schedules" activeStyle={activeStyle}>Schedules</NavLink>}
+            {session.sessionToken && (isDirector || isStaff) && <NavLink to="/schedules" >Schedules</NavLink>}
             {session.sessionToken && (isDirector || isStaff) && " | "}
-            {session.sessionToken && (isDirector || isStaff) && <NavLink to="/gamenights" activeStyle={activeStyle}>Game Nights</NavLink>}
+            {session.sessionToken && (isDirector || isStaff) && <NavLink to="/gamenights" >Game Nights</NavLink>}
             {session.sessionToken && " | "}
-            {session.sessionToken && <NavLink to="/prints" activeStyle={activeStyle}>3D Printing</NavLink>}
+            {session.sessionToken && <NavLink to="/prints" >3D Printing</NavLink>}
             {/* {isBanker && " | "} 
             {isBanker && <NavLink to="/bank">Bank</NavLink>} 
             {isDirector && " | "} 
