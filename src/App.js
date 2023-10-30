@@ -31,7 +31,7 @@ function App() {
         <div className="App">
             <Header />
             <Routes>
-                <Route exact path="/" element={<HomePage/>}></Route>
+                <Route exact="true" path="/" element={<HomePage/>}></Route>
                 <Route path="/about" element={<AboutPage/>}></Route>
                 <Route path="/login" element={<LoginPage/>}></Route>
                 <Route path="/logout" element={<LogoutPage/>}></Route>
