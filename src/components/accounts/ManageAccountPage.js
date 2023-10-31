@@ -123,7 +123,6 @@ const ManageAccountPage = ({ accounts, actions, allRoles, ...props }) => {
     if (rolesObject.isPrep || rolesObject.isCadet) {
       const username = setUsername(account.first, groupRole, account.last);
       const password = setPassword(account.first, groupRole, account.last);
-      console.log(username, password);
       parseObject.set("username", username);
       parseObject.set("password", password);
     }
@@ -273,7 +272,6 @@ function mapStateToProps(state) {
 }
 
 function getUserById(users, id) {
-  console.log(users);
   return users.find((user) => user.id === id) || null;
 }
 

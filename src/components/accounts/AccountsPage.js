@@ -43,7 +43,6 @@ class AccountsPage extends React.Component {
   }
 
   updateUser = (user) => {
-    console.log("here");
     const newRoleName = roleMapper.getGroupRole(user.parseObject.get("roles"));
     var oldRoleName = null;
     if (this.props.usersToRoles.has(user.id)) {
@@ -127,7 +126,6 @@ class AccountsPage extends React.Component {
   };
 
   changeGroupRole = (user, newGroupRole) => {
-    console.log(newGroupRole)
     const oldParseObject = user.parseObject;
     oldParseObject.set("roles", [newGroupRole]);
 
@@ -135,7 +133,6 @@ class AccountsPage extends React.Component {
     if (rolesObject.isPrep || rolesObject.isCadet) {
         const username = setUsername(user.first, newGroupRole, user.last);
         const password = setPassword(user.first, newGroupRole, user.last);
-        console.log(username, password);
         oldParseObject.set("username", username);
         oldParseObject.set("password", password);
       }
@@ -291,7 +288,6 @@ AccountsPage.propTypes = {
 
 //ownProps not need, so it is removed
 function mapStateToProps(state) {
-  console.log(state.roles.userToRoles)
   return {
     allRoles: state.roles.all,
     usersToRoles: state.roles.userToRoles,
