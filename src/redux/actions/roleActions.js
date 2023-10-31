@@ -53,6 +53,7 @@ export function loadUsersForRole(role) {
 }
 //TODO organize this
 export function changeGroupRole(user, newRole, oldRole) {
+    console.log(user, newRole, oldRole);
     return function (dispatch) {
         return roleApi
             .changeGroupRole(newRole, user)
@@ -85,6 +86,7 @@ export function changeGroupRole(user, newRole, oldRole) {
 }
 
 export function changeRoles(user, newGroupRole, rolesToAdd, rolesToRemove) {
+    console.log(user, newGroupRole, rolesToAdd, rolesToRemove);
     return function (dispatch) {
         rolesToAdd.map(roleToAdd => roleApi.addUser(roleToAdd, user)
         .then(() => {
