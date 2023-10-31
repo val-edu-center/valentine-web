@@ -9,11 +9,15 @@ import AccountForm from "./AccountForm"
 import { toast } from "react-toastify"
 import * as roleMapper from "../../utility/RoleMapper"
 import User from "../../model/User"
+import { Navigate, useParams } from "react-router-dom"
 
-const ManageAccountPage = ({ accounts, actions, history, allRoles, ...props }) => {
-    const [account, setAccount] = useState({ ...props.account })
+const ManageAccountPage = ({ accounts, actions, allRoles, ...props }) => {
+
+    const { slug } = useParams();
+    const [account, setAccount] = useState(!!slug && accounts.length ? getUserById(accounts, slug) : createNewUser())
     const [errors, setErrors] = useState({ ...props.errors })
     const [saving, setSaving] = useState(false)
+    const [redirect, setRedirect] = useState(false)
     useEffect(() => {
         if (accounts.length === 0) {
             actions.users.loadUsers().catch(error => {
@@ -30,7 +34,7 @@ const ManageAccountPage = ({ accounts, actions, history, allRoles, ...props }) =
 
         //useEffect with an empty array is equivalent to componentDidMount
         //Otherwise, would run everytime it renders
-    }, [props.account])
+    }, [account])
 
     function changeRoles(account, role, checked) {
         const oldParseObject = account.parseObject
@@ -171,7 +175,6 @@ const ManageAccountPage = ({ accounts, actions, history, allRoles, ...props }) =
         return Object.keys(errors).length === 0
     }
 
-    //One way to redirect, history comes from React Router
     function handleSave(event) {
         event.preventDefault()
         if (!formIsValid()) return
@@ -189,43 +192,43 @@ const ManageAccountPage = ({ accounts, actions, history, allRoles, ...props }) =
             //TODO Review this logic, account for any error, make sure to clear user if this happens
             actions.roles.changeRoles(updatedAccount, newGroupRole, rolesToAdd, rolesToRemove)
             toast.success("Account saved.")
-            history.push("/accounts")
+            setRedirect(true)
         }).catch(error => {
             setSaving(false)
             setErrors({ onSave: error.message })
         })
     }
+
+    if (redirect) {
+        return <Navigate to="/accounts" replace />;
+    }
     return <AccountForm allRoles={allRoles.map(r => r.getName())} onRolesChange={handleRolesChange} account={account} onFirstChange={handleFirstChange} onLastChange={handleLastChange} onPasswordChange={handlePasswordChange} onRoleChange={handleRoleChange} onUsernameChange={handleUsernameChange} onSave={handleSave} errors={errors} saving={saving}></AccountForm>
 }
 
 ManageAccountPage.propTypes = {
-    account: PropTypes.object.isRequired,
     errors: PropTypes.array.isRequired,
     accounts: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
     allRoles: PropTypes.array.isRequired,
     usersToRoles: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
-    const slug = ownProps.match.params.slug
-    const account = slug && state.users.list.length > 0 ? getUserById(state.users.list, slug) : createNewUser()
+function mapStateToProps(state) {
     return {
         allRoles: state.roles.all,
         usersToRoles: state.roles.userToRoles,
         accounts: state.users.list,
-        account,
         errors: []
     }
 }
 
 function getUserById(users, id) {
+    console.log(users)
     return users.find(user => user.id === id) || null
 }
 
 function createNewUser() {
-    const user = new User
+    const user = new User()
     user.parseObject = new Parse.User()
     return user
 }

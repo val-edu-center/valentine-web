@@ -53,7 +53,7 @@ const LoginPage = ({ session, actions, ...props }) => {
   }
 
   if (!!session.sessionToken) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" replace />
   }
 
   return saving ? (
