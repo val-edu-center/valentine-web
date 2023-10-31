@@ -46,7 +46,6 @@ const LoginPage = ({ session, actions, ...props }) => {
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
         setSaving(false);
         toast.error(error.message);
       });
